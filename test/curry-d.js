@@ -1,4 +1,4 @@
-/*jshint evil:true,maxstatements:1000*/
+/*jshint evil:true,maxstatements:10000*/
 exports = typeof exports === 'undefined' ? {} : exports;
 exports.test = function (expect, _, curryD) {
     var curry = curryD.curry;
@@ -15,11 +15,9 @@ exports.test = function (expect, _, curryD) {
                 return a + b + c;
             },
             sum: function () {
-                var sum = 0;
-                for (var args = _.toArray(arguments); args.length > 0;) {
-                    sum += args.pop();
-                }
-                return sum;
+                return _.reduce(arguments, function (total, n) {
+                    return total + n;
+                });
             },
             div5: function (a, b, c, d, e) {
                 return a / b / c / d / e;
@@ -128,12 +126,27 @@ exports.test = function (expect, _, curryD) {
         });
     };
 
+    var verifyCanForceOverflow = function (currier) {
+        it('allows more arguments than its length', function () {
+            var curried = _.partialRight(currier, null, false)(fns.sum, 11);
+
+            var oneShort = _.reduce(fns.wideRange(5), function (c, n) {
+                var result = c(n, 1);
+                expect(result).to.be.a('function');
+                return result;
+            }, curried);
+
+            expect(oneShort(1, 20, 1)).to.equal(42);
+        });
+    };
+
     describe('curry', function () {
         verifyFnLength(curry);
         verifyForcedLength(curry);
         verifyAllowsMultiple(curry);
         verifyForcesSingle(curry);
         verifyPreventsArgOverflow(curry);
+        verifyCanForceOverflow(curry);
     });
 
     describe('curry right', function () {
@@ -142,6 +155,7 @@ exports.test = function (expect, _, curryD) {
         verifyAllowsMultiple(curryRight);
         verifyForcesSingle(curryRight);
         verifyPreventsArgOverflow(curryRight);
+        verifyCanForceOverflow(curryRight);
     });
 
 
@@ -154,6 +168,10 @@ exports.test = function (expect, _, curryD) {
             expect(uncurry(currier(fns.sum, 20)(99)).apply(null, fns.wideRange(20))).to.equal(210);
         };
 
+        it('gives back the original function', function () {
+            expect(uncurry(curry(fns.sum))).to.equal(fns.sum);
+        });
+
         it('can be uncurry', function () {
             checkAdd2(curry);
             checkAdd20(curry);
@@ -162,6 +180,10 @@ exports.test = function (expect, _, curryD) {
         it('can be uncurryRight', function () {
             checkAdd2(curryRight);
             checkAdd20(curryRight);
+        });
+
+        it('noops when the function is not curried', function () {
+            expect(uncurry(fns.sum)).to.equal(fns.sum);
         });
     });
 };

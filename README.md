@@ -1,7 +1,7 @@
 # curry-d
 
-An efficient implementation of curry. Using a dispatcher, gets a little more than 20% speed increase
-over traditional approach while still adding lots of sugar.[1](http://jsperf.com/compare-curry-functions)
+An efficient implementation of curry. Using a dispatcher adds ~50% more ops/sec than a traditional
+approach, while still adding lots of sugar.[1](http://jsperf.com/compare-curry-functions/2)
 
 ## Usage
 
@@ -22,29 +22,29 @@ curry fills a functions signature from left to right until all args are defined:
 In case you need to curry a varargs function you can specify the number of arguments desired at
 curry time:
 
-    var add = function () {
+    var sum = function () {
         return require('lodash').reduce(arguments, function (total, n) {return total + n;});
     };
 
-    var curried = curry(add)(40); // undefined
-    var curried = curry(add, 2)(40); // a function
+    var curried = curry(sum)(40); // undefined
+    var curried = curry(sum, 2)(40); // a function
     curried(2); // 42
 
 You can optionally add multiple arguments in each call:
 
-    curry(add, 2)(40, 2); // 42
+    curry(sum, 2)(40, 2); // 42
 
 Unless you want to force a single argument per call (handy w/ e.g., _.forEach):
 
-    curry(add, 2, true)(40, 99)(2); // 42
+    curry(sum, 2, true)(40, 99)(2); // 42
 
 However, you cannot overflow your arguments:
 
-    curry(add, 2)(40, 2, 99); // 42
+    curry(sum, 2)(40, 2, 99); // 42
 
 Unless you really want to:
 
-    curry(add, null, null, false)(40, 2, 99); // 141
+    curry(sum, null, null, false)(40, 2, 99); // 141
 
 ### curryRight
 

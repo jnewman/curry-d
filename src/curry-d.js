@@ -33,8 +33,7 @@
             seal = seal !== false;
             len = !!len ? len : fn.length;
             var held = [];
-            return function curried(args) {
-                curried._fn = fn;
+            var captured = function curried(args) {
                 args = slice.call(arguments, 0);
 
                 if (forceOne) {
@@ -55,6 +54,8 @@
                     return fn.apply(this, held);
                 }
             };
+            captured._fn = fn;
+            return captured;
         };
     };
 
