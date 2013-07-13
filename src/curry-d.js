@@ -13,7 +13,7 @@
     }
 }(this, function (exports) {
     'use strict';
-    var slice = [].slice;
+    var slice = Array.prototype.slice;
     var RIGHT = 'unshift';
 
     var makeCurry = function (adder) {
@@ -49,7 +49,8 @@
                     return curried;
                 } else {
                     if (seal) {
-                        held.splice(len);
+                        // Clear off the beginning if it's a right
+                        held = !reverse ? held.slice(0, len) : held.slice(held.length - len);
                     }
                     return fn.apply(this, held);
                 }
