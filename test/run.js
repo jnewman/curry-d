@@ -1,6 +1,7 @@
 (function (global) {
     var TESTS = [
-        'test/curry-d-amd'
+        'test/curry-d-amd',
+        'test/curry-d-global'
     ];
 
     require({

@@ -6,5 +6,5 @@
     var expect = require('chai').expect;
     var _ = require('lodash');
 
-    require('./curry-d').test(expect, _, curryD);
+    require('./curry-d').test('Require in Node', expect, _, curryD);
 })();

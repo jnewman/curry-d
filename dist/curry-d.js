@@ -13,7 +13,7 @@
     }
 }(this, function (exports) {
     'use strict';
-    var slice = [].slice;
+    var slice = Array.prototype.slice;
     var RIGHT = 'unshift';
 
     var makeCurry = function (adder) {
@@ -27,16 +27,18 @@
          * @param {number} [len=fn.length] Forces the collected arguments to a specific value.
          * @param {boolean} [forceOne=false] Whether to prevent more than one arg at a time.
          * @param {boolean} [seal=true] Whether to prevent args beyond the len.
+         * @param {Array.<*>} [held=[]]
          * @return {function} A function that executes fn once it's been passed all its arguments.
          */
-        return function (fn, len, forceOne, seal) {
+        return function currier(fn, len, forceOne, seal, held) {
             seal = seal !== false;
             len = !!len ? len : fn.length;
-            var held = [];
-            return function curried(args) {
-                curried._fn = fn;
-                args = slice.call(arguments, 0);
 
+            held = held || [];
+            var captured = function curried(args) {
+                var next = null;
+                var old = held.slice();
+                args = slice.call(arguments);
                 if (forceOne) {
                     held[adder](args[0]);
                 }
@@ -46,14 +48,19 @@
                 }
 
                 if (held.length < len) {
-                    return curried;
+                    next = currier(fn, len, !!forceOne, !!seal, held);
+                    held = old;
+                    return next;
                 } else {
                     if (seal) {
-                        held.splice(len);
+                        // Clear off the beginning if it's a right
+                        held = !reverse ? held.slice(0, len) : held.slice(held.length - len);
                     }
                     return fn.apply(this, held);
                 }
             };
+            captured._fn = fn;
+            return captured;
         };
     };
 

@@ -6,5 +6,5 @@ define(function (require) {
     var _ = require('lodash');
 
     require('./curry-d');
-    exports.test(expect, _, curryD);
+    exports.test('AMD in browser', expect, _, curryD);
 });
