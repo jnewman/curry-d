@@ -1,9 +1,21 @@
 # curry-d
 
-An efficient implementation of curry. Using a dispatcher adds ~50% more ops/sec than a traditional
-approach, while still adding lots of sugar.[1](http://jsperf.com/compare-curry-functions/2)
+A curry that uses a dispatcher to achieve arbitrary curry length w/ solid performance<sup>[3](http://jsperf.com/compare-curry-functions/3)</sup>.
 
 ## Usage
+
+### Node
+
+Install as usual:
+
+    npm install curry-d
+
+Functions are props of exports
+
+    pInt = require('curry-d').curryRight(parseInt)(10);
+    pInt('0101') // 101
+
+## Functions
 
 This module exports three functions: curry, curryRight, and uncurry.
 
@@ -66,4 +78,4 @@ function is not curried:
 
     uncurry(curry(divide)(1)) === divide; // true
 
-More to come.
+

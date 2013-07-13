@@ -140,6 +140,16 @@ exports.test = function (expect, _, curryD) {
         });
     };
 
+    var verifyStatelessness = function (currier) {
+        it('original curried function is not affected by arguments being passed', function () {
+            var sumFive = currier(fns.sum, 5);
+            var sumFour = sumFive(10);
+
+            expect(sumFive(1,1,1,1,1)).to.equal(5);
+            expect(sumFour(1,1,1,1)).to.equal(14);
+        });
+    };
+
     describe('curry', function () {
         verifyFnLength(curry);
         verifyForcedLength(curry);
@@ -147,6 +157,7 @@ exports.test = function (expect, _, curryD) {
         verifyForcesSingle(curry);
         verifyPreventsArgOverflow(curry);
         verifyCanForceOverflow(curry);
+        verifyStatelessness(curry);
     });
 
     describe('curry right', function () {
@@ -156,6 +167,7 @@ exports.test = function (expect, _, curryD) {
         verifyForcesSingle(curryRight);
         verifyPreventsArgOverflow(curryRight);
         verifyCanForceOverflow(curryRight);
+        verifyStatelessness(curryRight);
     });
 
 
