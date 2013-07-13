@@ -23,6 +23,7 @@
     "maxdepth": 6,
     "maxlen": 120,
     "maxstatements": 15,
+    "node": true,
     "noempty": true,
     "newcap": true,
     "nonew": true,

@@ -1,0 +1,42 @@
+{
+    "name": "curry-d",
+    "version": "0.1.0",
+    "description": "An optimized version of curry. UMD compatible for widespread use",
+    "author": "Joshua Newman <joshua.l.newman@gmail.com>",
+    "keywords": [
+        "functional",
+        "curry",
+        "curry right",
+        "uncurry"
+    ],
+    "licenses": [
+        {
+            "type": "BSD3",
+            "url": "https://github.com/jnewman/curry-d/blob/master/LICENSE.txt"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:jnewman/curry-d.git"
+    },
+    "main": "./dist/curry-d",
+    "scripts": {
+        "dist": "grunt dist",
+        "lint": "grunt jshint",
+        "test": "grunt test"
+    },
+    "devDependencies": {
+        "chai": "~1.5",
+        "grunt": ">=0.4",
+        "grunt-cli": "~0.1",
+        "grunt-contrib-concat": "~0.2",
+        "grunt-contrib-connect": "~0.3",
+        "grunt-contrib-jshint": "~0.4",
+        "grunt-contrib-uglify": "~0.2",
+        "grunt-mocha-phantomjs": "~0.2",
+        "jshint": "~2.1",
+        "lodash": "~1.2",
+        "mocha": "~1.9",
+        "requirejs": "~2.1"
+    }
+}
