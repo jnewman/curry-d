@@ -1,7 +1,7 @@
 # curry-d
 
 An efficient implementation of curry. Using a dispatcher, gets a little more than 20% speed increase
-over traditional approach while still adding lots of sugar.
+over traditional approach while still adding lots of sugar.[1](http://jsperf.com/compare-curry-functions)
 
 ## Usage
 
