@@ -29,7 +29,7 @@
             var held = [];
             return function curried(args) {
                 curried._fn = fn;
-                held[adder].apply(held, slice.call(args, 0));
+                held[adder].apply(held, slice.call(arguments, 0));
                 if (held.length < len) {
                     return curried;
                 } else {
