@@ -13,7 +13,7 @@ Install as usual:
 Functions are props of exports
 
     var bint = require('curry-d').curryRight(parseInt)(2);
-    bint('101010') // 42
+    bint('101010'); // 42
 
 ### RequireJS
 
@@ -21,13 +21,13 @@ Add the path to curry-d, then require as usual:
 
     define(function () {
         var bint = require('curry-d').curryRight(parseInt)(2);
-        bint('101010') // 42
+        bint('101010'); // 42
     });
 
 ### Globally in the browser
 
     var bint = curryRight(parseInt)(2);
-    bint('101010') // 42
+    bint('101010'); // 42
 
 ## Functions
 
