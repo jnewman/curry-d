@@ -1,7 +1,6 @@
-//noinspection ThisExpressionReferencesGlobalObjectJS
 (function (global) {
     var TESTS = [
-        'test/curry-d'
+        'test/curry-d-amd'
     ];
 
     require({
@@ -35,7 +34,6 @@
         mocha.ui('bdd');
         mocha.reporter('html');
 
-        //noinspection JSUnresolvedVariable
         var runner = typeof global !== 'undefined' && global.mochaPhantomJS ?
             global.mochaPhantomJS : mocha;
 

@@ -1,4 +1,4 @@
-dispatch-curry
-==============
+curry-d
+=======
 
-A version of curry that uses  dispatcher.
+An efficient implementation of curry (uses a dispatcher).

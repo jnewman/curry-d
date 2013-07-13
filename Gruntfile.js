@@ -5,7 +5,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+
     grunt.loadNpmTasks('grunt-mocha-phantomjs');
+    grunt.loadNpmTasks('grunt-mocha-test');
 
     grunt.initConfig({
         concat: {
@@ -32,6 +34,14 @@ module.exports = function (grunt) {
         'mocha_phantomjs': {
             all: ['test/**/*.html']
         },
+        mochaTest: {
+            test: {
+                options: {
+                    reporter: 'spec'
+                },
+                src: ['test/curry-d-node.js']
+            }
+        },
         pkg: grunt.file.readJSON('package.json'),
         uglify: {
             options: {
@@ -51,6 +61,6 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('test', ['jshint', 'mocha_phantomjs']);
+    grunt.registerTask('test', ['jshint', 'mocha_phantomjs', 'mochaTest']);
     grunt.registerTask('dist', ['concat', 'uglify', 'test']);
 };

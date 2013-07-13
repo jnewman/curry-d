@@ -1,18 +1,9 @@
-/*jshint evil:true*/
-define([
-    'mocha', 'chai',
-    'lodash',
-    'curry-d'
-], function (
-    mocha, chai,
-    _,
-    curryD
-) {
-    'use strict';
-    var expect = chai.expect;
+/*jshint evil:true,maxstatements:1000*/
+exports = typeof exports === 'undefined' ? {} : exports;
+exports.test = function (expect, _, curryD) {
     var curry = curryD.curry;
-    var curryRight = curryD.curryRight;
-    var uncurry = curryD.uncurry;
+    var curryRight = curry.r;
+    var uncurry = curry.un;
 
     var fns = null;
     beforeEach(function () {
@@ -129,4 +120,4 @@ define([
             checkAdd20(curryRight);
         });
     });
-});
+};
