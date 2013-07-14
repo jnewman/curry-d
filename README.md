@@ -1,6 +1,10 @@
 # curry-d
 
-A curry that uses a dispatcher to achieve arbitrary curry length w/ solid performance<sup>[3](http://jsperf.com/compare-curry-functions/3)</sup>.
+An implementation of curry that uses a dispatcher to achieve arbitrary curry length. This micro library trades the
+ability to check arity for [~2x](/perf/samples.csv) perf on high arity function and increased
+flexibility.
+
+[![Build Status](https://api.travis-ci.org/jnewman/curry-d.png?branch=master)](https://travis-ci.org/jnewman/curry-d)
 
 ## Usage
 

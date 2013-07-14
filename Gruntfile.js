@@ -1,6 +1,8 @@
 module.exports = function (grunt) {
     'use strict';
 
+    grunt.loadNpmTasks('grunt-benchmark');
+
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -10,6 +12,17 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-mocha-test');
 
     grunt.initConfig({
+        benchmark: {
+            all: {
+                // Skip sub folders, so I can keep helpers around.
+                src: ['perf/*.js'],
+                dest: 'perf/samples.csv'
+            },
+            options: {
+                // This can also be set inside specific tests.
+                displayResults: true
+            }
+        },
         concat: {
             options: {
                 separator: ';'
@@ -61,6 +74,7 @@ module.exports = function (grunt) {
         }
     });
 
+    grunt.registerTask('perf', ['benchmark:all']);
     grunt.registerTask('test', ['jshint', 'mocha_phantomjs', 'mochaTest']);
     grunt.registerTask('dist', ['concat', 'uglify', 'test']);
 };

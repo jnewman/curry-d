@@ -10,6 +10,7 @@
             'lodash': '../node_modules/lodash/lodash',
             'mocha': '../node_modules/mocha/mocha',
             'curry-d': '../src/curry-d',
+            'curry-d-dist': '../dist/curry-d.min',
             'test': '.'
         },
 
