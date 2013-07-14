@@ -38,7 +38,7 @@
         },
         "harness" : "mocha",
         "files": [
-            "test/curry-d-testling.js"
+            "test/curry-d-node.js"
         ]
     },
     "devDependencies": {
