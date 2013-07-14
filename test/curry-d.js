@@ -151,6 +151,17 @@ exports.test = function (contextDescription, expect, _, curryD) {
             });
         };
 
+        var verifyLenIsCorrect = function (currier) {
+            it('reports the correct length via len', function () {
+                var sumFive = currier(fns.sum, 5);
+                expect(sumFive.len).to.equal(5);
+                expect(sumFive(1, 1).len).to.equal(3);
+                var threeLeft = sumFive(1, 1);
+                expect(threeLeft.len).to.equal(3);
+                expect(threeLeft(1, 1).len).to.equal(1);
+            });
+        };
+
         describe('curry', function () {
             verifyFnLength(curry);
             verifyForcedLength(curry);
@@ -159,6 +170,7 @@ exports.test = function (contextDescription, expect, _, curryD) {
             verifyPreventsArgOverflow(curry);
             verifyCanForceOverflow(curry);
             verifyStatelessness(curry);
+            verifyLenIsCorrect(curry);
         });
 
         describe('curry right', function () {
@@ -169,6 +181,7 @@ exports.test = function (contextDescription, expect, _, curryD) {
             verifyPreventsArgOverflow(curryRight);
             verifyCanForceOverflow(curryRight);
             verifyStatelessness(curryRight);
+            verifyLenIsCorrect(curryRight);
 
             it('can make bInt', function () {
                 var bint = curryRight(parseInt)(2);

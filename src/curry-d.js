@@ -51,6 +51,7 @@
                 var nextLen = nextHeld.length;
                 if (nextLen < len) {
                     next = currier(fn, len, forceOne, seal, nextHeld);
+                    next.len = len - nextLen;
                     position = oldPosition;
                     return next;
                 } else {
@@ -70,7 +71,9 @@
                     }
                 }
             };
+
             captured._fn = fn;
+            captured.len = len;
             return captured;
         };
     };
