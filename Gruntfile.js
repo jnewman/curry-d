@@ -76,5 +76,5 @@ module.exports = function (grunt) {
 
     grunt.registerTask('perf', ['benchmark:all']);
     grunt.registerTask('test', ['jshint', 'mocha_phantomjs', 'mochaTest']);
-    grunt.registerTask('dist', ['concat', 'uglify', 'test']);
+    grunt.registerTask('dist', ['concat:dist', 'uglify', 'test']);
 };
