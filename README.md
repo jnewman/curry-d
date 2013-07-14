@@ -1,8 +1,8 @@
 # curry-d
 
 An implementation of curry that uses a dispatcher to achieve arbitrary curry length. This micro library trades the
-ability to check arity for [~2x](/perf/samples.csv) perf on high arity function and increased
-flexibility.
+ability to check arity for [~2.2x](./perf/samples.csv) perf on high arity functions and 1.2x on <=
+10  and increased flexibility (decide if there should be only one arg and allow extra args).
 
 [![Build Status](https://api.travis-ci.org/jnewman/curry-d.png?branch=master)](https://travis-ci.org/jnewman/curry-d)
 

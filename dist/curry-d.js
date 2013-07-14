@@ -1,4 +1,5 @@
 /*global exports:true,define:false*/
+/*jshint maxstatements:20*/
 //noinspection ThisExpressionReferencesGlobalObjectJS
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
@@ -14,7 +15,7 @@
 }(this, function (exports) {
     'use strict';
     var slice = Array.prototype.slice;
-    var RIGHT = 'unshift';
+    var RIGHT = 'right';
 
     var makeCurry = function (adder) {
         var reverse = adder === RIGHT;
@@ -27,36 +28,46 @@
          * @param {number} [len=fn.length] Forces the collected arguments to a specific value.
          * @param {boolean} [forceOne=false] Whether to prevent more than one arg at a time.
          * @param {boolean} [seal=true] Whether to prevent args beyond the len.
-         * @param {Array.<*>} [held=[]]
+         * @param {Array.<*>} [held=[]] Arguments fro a previous call.
          * @return {function} A function that executes fn once it's been passed all its arguments.
          */
         return function currier(fn, len, forceOne, seal, held) {
-            seal = seal !== false;
             len = !!len ? len : fn.length;
-
+            forceOne = !!forceOne;
+            seal = seal !== false;
             held = held || [];
+            var position = held.length;
             var captured = function curried(args) {
-                var next = null;
-                var old = held.slice();
-                args = slice.call(arguments);
+                var oldPosition = position;
+                var nextHeld = held.slice();
                 if (forceOne) {
-                    held[adder](args[0]);
+                    nextHeld[position++] = args;
                 }
                 else {
-                    // If multiple we should reverse the args when right.
-                    held[adder].apply(held, reverse ? args.reverse() : args);
+                    nextHeld = nextHeld.concat(slice.call(arguments));
                 }
 
-                if (held.length < len) {
-                    next = currier(fn, len, !!forceOne, !!seal, held);
-                    held = old;
+                var next = null;
+                var nextLen = nextHeld.length;
+                if (nextLen < len) {
+                    next = currier(fn, len, forceOne, seal, nextHeld);
+                    position = oldPosition;
                     return next;
                 } else {
                     if (seal) {
                         // Clear off the beginning if it's a right
-                        held = !reverse ? held.slice(0, len) : held.slice(held.length - len);
+                        if (reverse) {
+                            nextHeld.reverse().splice(0, nextLen - len);
+                            return fn.apply(this, nextHeld);
+                        }
+                        // Clear extras.
+                        else {
+                            return fn.apply(this, nextHeld.slice(0, len));
+                        }
                     }
-                    return fn.apply(this, held);
+                    else {
+                        return fn.apply(this, reverse ? nextHeld.reverse() : nextHeld);
+                    }
                 }
             };
             captured._fn = fn;
@@ -64,7 +75,7 @@
         };
     };
 
-    exports.curry = makeCurry('push');
+    exports.curry = makeCurry();
     exports.curryRight = exports.curry.r = makeCurry(RIGHT);
     exports.uncurry = exports.curry.un = function (curried) {
         return curried._fn || curried;
