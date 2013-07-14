@@ -52,7 +52,9 @@ module.exports = function (grunt) {
                 options: {
                     reporter: 'spec'
                 },
-                src: ['test/curry-d-node.js']
+                src: [
+                    'test/curry-d-node.js'
+                ]
             }
         },
         pkg: grunt.file.readJSON('package.json'),
