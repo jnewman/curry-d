@@ -28,12 +28,12 @@
     },
     "testling": {
         "browsers": {
-            "ie": [7, 8, 9],
+            "ie": [8, 9],
             "ipad": [6],
             "iphone": [6],
             "firefox": [19, "nightly"],
             "chrome": [25, "canary"],
-            "safari": [5.2, 6],
+            "safari": [6],
             "opera": [12, "next"]
         },
         "harness" : "mocha",
