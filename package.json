@@ -58,5 +58,10 @@
         "mocha": "~1.9",
         "requirejs": "~2.1"
     },
-    "license": "BSD3"
+    "licenses": [
+        {
+            "type": "BSD3",
+            "url": "https://github.com/jnewman/curry-d/blob/master/LICENSE.txt"
+        }
+    ]
 }
