@@ -58,5 +58,5 @@
         "mocha": "~1.9",
         "requirejs": "~2.1"
     },
-    "license": "BSD3"
+    "licenses": "BSD3"
 }
