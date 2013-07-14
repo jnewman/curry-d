@@ -1,21 +1,17 @@
 module.exports = function (grunt) {
     'use strict';
 
-    grunt.loadNpmTasks('grunt-benchmark');
+    var pjson = grunt.file.readJSON("package.json");
 
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-
-    grunt.loadNpmTasks('grunt-mocha-phantomjs');
-    grunt.loadNpmTasks('grunt-mocha-test');
+    var _ = require('lodash');
+    _.filter(_.keys(pjson.devDependencies), function (key) {
+        return (/^grunt-/).test(key) && key !== 'grunt-cli';
+    }).forEach(grunt.loadNpmTasks);
 
     grunt.initConfig({
         benchmark: {
             all: {
-                // Skip sub folders, so I can keep helpers around.
-                src: ['perf/*.js'],
+                src: ['perf/**/*.js'],
                 dest: 'perf/samples.csv'
             },
             options: {
@@ -57,7 +53,7 @@ module.exports = function (grunt) {
                 ]
             }
         },
-        pkg: grunt.file.readJSON('package.json'),
+        pkg: pjson,
         uglify: {
             options: {
                 banner: [
@@ -76,7 +72,7 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('perf', ['benchmark:all']);
+    grunt.registerTask('perf', ['benchmark']);
     grunt.registerTask('test', ['jshint', 'mocha_phantomjs', 'mochaTest']);
     grunt.registerTask('dist', ['concat:dist', 'uglify', 'test']);
 };
