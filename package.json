@@ -54,7 +54,7 @@
         "grunt-mocha-phantomjs": "~0.2",
         "grunt-mocha-test": "~0.5",
         "jshint": "~2.1",
-        "lodash": "~1.2",
+        "lodash": "~2.4",
         "mocha": "~1.9",
         "requirejs": "~2.1"
     },
