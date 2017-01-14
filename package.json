@@ -42,21 +42,21 @@
         ]
     },
     "devDependencies": {
-        "chai": "~1.5",
-        "curry": "~1.0",
+        "chai": "~3.5.0",
+        "curry": "~1.2.0",
         "grunt": ">=0.4",
-        "grunt-benchmark": "~0.2",
-        "grunt-cli": "~0.1",
-        "grunt-contrib-concat": "~0.2",
-        "grunt-contrib-connect": "~0.3",
-        "grunt-contrib-jshint": "~0.6",
-        "grunt-contrib-uglify": "~0.2",
-        "grunt-mocha-phantomjs": "~0.2",
-        "grunt-mocha-test": "~0.5",
-        "jshint": "~2.1",
-        "lodash": "~2.4",
-        "mocha": "~1.9",
-        "requirejs": "~2.1"
+        "grunt-benchmark": "~1.0.0",
+        "grunt-cli": "~1.2.0",
+        "grunt-contrib-concat": "~1.0.1",
+        "grunt-contrib-connect": "~1.0.2",
+        "grunt-contrib-jshint": "~1.1.0",
+        "grunt-contrib-uglify": "~2.0.0",
+        "grunt-mocha-phantomjs": "~4.0.0",
+        "grunt-mocha-test": "~0.13.2",
+        "jshint": "~2.9.4",
+        "lodash": "~4.17.4",
+        "mocha": "~3.2.0",
+        "requirejs": "~2.3.2"
     },
     "licenses": "BSD3"
 }
